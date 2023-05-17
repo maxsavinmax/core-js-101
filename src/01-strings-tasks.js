@@ -198,17 +198,17 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-  const horizontalLine = String.fromCharCode(9472).repeat(width - 2);
-  const lines = [
-    String.fromCharCode(9484) + horizontalLine + String.fromCharCode(9488),
-    ...Array(height - 2).fill(
-      String.fromCharCode(9474) +
-        ' '.repeat(width - 2) +
-        String.fromCharCode(9474)
-    ),
-    String.fromCharCode(9492) + horizontalLine + String.fromCharCode(9496),
-  ];
-  return lines.join('\n') + '\n';
+  let result = '';
+  for (let i = 0; i <= height - 1; i += 1) {
+    if (i === 0) {
+      result += `\u250C${'\u2500'.repeat(width - 2)}\u2510\n`;
+    } else if (i === height - 1) {
+      result += `\u2514${'\u2500'.repeat(width - 2)}\u2518\n`;
+    } else {
+      result += `\u2502${' '.repeat(width - 2)}\u2502\n`;
+    }
+  }
+  return result;
 }
 
 /**
@@ -253,9 +253,8 @@ function encodeToRot13(str) {
 function isString(value) {
   if (value instanceof String || typeof value === 'string') {
     return true;
-  } else {
-    return false;
   }
+  return false;
 }
 
 /**
